@@ -17,7 +17,8 @@ class profile extends Model
     'url',
     ];
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
+
         }
 
 }

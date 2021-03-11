@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Livewire\Profile;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,19 +17,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/test', function(){
-	$user = App\Models\User::find(1);
-   // return $user;
-	// return $user->profile;
-	 //return $user->images;
-
-	$profile = App\Models\User::find(1);
-	return $profile->user;
-
-	 $image = App\Models\Image::find(1);
-	 return $image->user;
+    $user=App\Models\User::find(1);
+    // return $user;//ok
+    // return $user->profile;//ok
+    // return $user->images;//ok
+   $profile=App\Models\Profile::find(1);
+     //return $profile;//ok
+     //return $profile->user;//ok
+    // return $profile->user->images;
+    $image=App\Models\Image::find(1);
+    // return $image->profile;
+ //return $image->images;
+ //return $image;//ok
+ //return $image->user;//ok
+ return $image->user->profile;//ok
 });
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+Route::get('/profile/{id}', Profile::class);
+Route::get('dashboard/upload', Upload::class)->name('upload');
